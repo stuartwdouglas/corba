@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ JBoss, Home of Professional Open Source.
+  ~ Copyright 2012 Red Hat, Inc., and individual contributors
+  ~ as indicated by the @author tags.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jboss.corba</groupId>
+        <artifactId>jboss-corba-parent</artifactId>
+        <version>1.0.0.Alpha1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.jboss.corba</groupId>
+    <artifactId>jboss-corba-api</artifactId>
+    <version>1.0.0.Alpha1-SNAPSHOT</version>
+
+    <name>JBoss Corba API</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>idlj-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>src/main/java</sourceDirectory>
+                            <sources>
+                                <source>
+                                    <compatible>false</compatible>
+                                    <includes>
+                                        <include>org/omg/PortableServer/poa.idl</include>
+                                        <include>org/omg/PortableInterceptor/Interceptors.idl</include>
+                                        <include>org/omg/PortableInterceptor/IOP.idl</include>
+                                        <include>org/omg/PortableInterceptor/Mssaging.idl</include>
+                                        <include>org/omg/CosNaming/nameservice.idl</include>
+                                        <include>org/omg/DynamicAny/DynamicAny.idl</include>
+                                    </includes>
+                                    <packagePrefixes>
+                                        <packagePrefix>
+                                            <type>CORBA</type>
+                                            <prefix>org.omg</prefix>
+                                        </packagePrefix>
+                                        <packagePrefix>
+                                            <type>PortableServer</type>
+                                            <prefix>org.omg</prefix>
+                                        </packagePrefix>
+                                        <packagePrefix>
+                                            <type>PortableInterceptor</type>
+                                            <prefix>org.omg</prefix>
+                                        </packagePrefix>
+                                        <packagePrefix>
+                                            <type>CosNaming</type>
+                                            <prefix>org.omg</prefix>
+                                        </packagePrefix>
+                                        <packagePrefix>
+                                            <type>DynamicAny</type>
+                                            <prefix>org.omg</prefix>
+                                        </packagePrefix>
+                                        <packagePrefix>
+                                            <type>Dynamic</type>
+                                            <prefix>org.omg</prefix>
+                                        </packagePrefix>
+                                        <packagePrefix>
+                                            <type>IOP</type>
+                                            <prefix>org.omg</prefix>
+                                        </packagePrefix>
+                                    </packagePrefixes>
+
+                                    <defines>
+                                      <define>
+                                        <symbol>CORBA3</symbol>
+                                      </define>
+                                    </defines>
+
+                                    <additionalArguments>
+                                        <additionalArgument>-corba</additionalArgument>
+                                        <additionalArgument>3.0</additionalArgument>
+                                        <additionalArguments>-fall</additionalArguments>
+                                        <additionalArgument>-i</additionalArgument>
+                                        <additionalArgument>${project.build.sourceDirectory}/org/omg/CORBA</additionalArgument>
+                                        <additionalArgument>-i</additionalArgument>
+                                        <additionalArgument>${project.build.sourceDirectory}/org/omg/PortableInterceptor</additionalArgument>
+                                        <additionalArgument>-i</additionalArgument>
+                                        <additionalArgument>${project.build.sourceDirectory}/org/omg/PortableServer</additionalArgument>
+                                    </additionalArguments>
+                                </source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
