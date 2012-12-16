@@ -414,11 +414,17 @@ public class CorbaMessageMediatorImpl
 
     public boolean sentFullMessage()
     {
+        if(outputObject == null) {
+            return false;
+        }
         return outputObject.getBufferManager().sentFullMessage();
     }
 
     public boolean sentFragment()
     {
+        if(outputObject == null) {
+            return false;
+        }
         return outputObject.getBufferManager().sentFragment();
     }
 
