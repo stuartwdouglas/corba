@@ -1,0 +1,21 @@
+package org.omg.CosPropertyService;
+
+/**
+ * Generated from IDL struct "PropertyMode".
+ *
+ * @author JacORB IDL compiler V 2.3.1, 27-May-2009
+ * @version generated at Dec 14, 2011 3:09:55 PM
+ */
+
+public final class PropertyMode
+	implements org.omg.CORBA.portable.IDLEntity
+{
+	public PropertyMode(){}
+	public java.lang.String property_name;
+	public org.omg.CosPropertyService.PropertyModeType property_mode;
+	public PropertyMode(java.lang.String property_name, org.omg.CosPropertyService.PropertyModeType property_mode)
+	{
+		this.property_name = property_name;
+		this.property_mode = property_mode;
+	}
+}

@@ -80,6 +80,7 @@
 
     <modules>
         <module>api</module>
+        <module>ext-api</module>
         <module>impl</module>
     </modules>
 
