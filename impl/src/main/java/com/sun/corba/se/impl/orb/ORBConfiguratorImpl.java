@@ -433,8 +433,9 @@ public class ORBConfiguratorImpl implements ORBConfigurator {
         Resolver resolver =
             ResolverDefault.makeCompositeResolver( localResolver,
                 ResolverDefault.makeCompositeResolver( irResolver,
-                    ResolverDefault.makeCompositeResolver( dirResolver,
-                        bootResolver ) ) ) ;
+                //    ResolverDefault.makeCompositeResolver( dirResolver,
+                //        bootResolver ) ) ) ;
+                dirResolver));
         orb.setResolver( resolver ) ;
     }
 
