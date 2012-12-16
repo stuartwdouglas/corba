@@ -397,6 +397,9 @@ public class CorbaServerRequestDispatcherImpl
 
             ObjectKeyTemplate oktemp = okey.getTemplate() ;
             int sId = oktemp.getServerId() ;
+            if(sId == -1) {
+                return;
+            }
             int scid = oktemp.getSubcontractId() ;
 
             if (!orb.isLocalServerId(scid, sId)) {
