@@ -108,7 +108,7 @@ public class ThreadPoolImpl implements ThreadPool
     private ThreadGroup threadGroup;
 
     Object workersLock = new Object();
-    List<WorkerThread> workers = new ArrayList<>();
+    List<WorkerThread> workers = new ArrayList<WorkerThread>();
 
     /**
      * This constructor is used to create an unbounded threadpool
@@ -154,7 +154,7 @@ public class ThreadPoolImpl implements ThreadPool
         // Copy to avoid concurrent modification problems.
         List<WorkerThread> copy = null;
         synchronized (workersLock) {
-            copy = new ArrayList<>(workers);
+            copy = new ArrayList<WorkerThread>(workers);
         }
 
         for (WorkerThread wt : copy) {

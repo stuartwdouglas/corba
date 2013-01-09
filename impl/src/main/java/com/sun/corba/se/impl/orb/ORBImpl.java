@@ -1316,7 +1316,7 @@ public class ORBImpl extends com.sun.corba.se.spi.orb.ORB
     protected void shutdownServants(boolean wait_for_completion) {
         Set<ObjectAdapterFactory> oaset;
         synchronized (this) {
-            oaset = new HashSet<>(requestDispatcherRegistry.getObjectAdapterFactories());
+            oaset = new HashSet<ObjectAdapterFactory>(requestDispatcherRegistry.getObjectAdapterFactories());
         }
 
         for (ObjectAdapterFactory oaf : oaset)

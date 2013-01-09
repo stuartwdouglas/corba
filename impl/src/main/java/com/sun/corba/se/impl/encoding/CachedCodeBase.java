@@ -58,7 +58,7 @@ public class CachedCodeBase extends _CodeBaseImplBase
     private CorbaConnection conn;
 
     private static Object iorMapLock = new Object();
-    private static Hashtable<IOR,CodeBase> iorMap = new Hashtable<>();
+    private static Hashtable<IOR,CodeBase> iorMap = new Hashtable<IOR,CodeBase>();
 
     public static synchronized void cleanCache( ORB orb ) {
         synchronized (iorMapLock) {
