@@ -1,12 +1,12 @@
-/***** Copyright (c) 1999-2000 Object Management Group. Unlimited rights to
-       duplicate and use this code are hereby granted provided that this
+/***** Copyright (c) 1999-2000 Object Management Group. Unlimited rights to 
+       duplicate and use this code are hereby granted provided that this 
        copyright notice is included.
 *****/
 
 /***** This class is specifed by the mapping as abstract.
        A "dummy" implementation is provided so that the "official" org.omg.*
-       packages may be compiled.
-
+       packages may be compiled.  
+       
        ORB-vendors shall provide a complete implementation of the class
        by extending it with a vendor-specific class which
        provides "real" implementations for all the methods. E.g.
@@ -38,7 +38,7 @@ public abstract class ORB extends org.omg.CORBA_2_3.ORB {
 
     public org.omg.CORBA.TypeCode create_local_interface_tc(
                                     String id,
-                                    String name)
+                                    String name) 
     {
         throw new org.omg.CORBA.NO_IMPLEMENT();
     }
