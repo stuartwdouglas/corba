@@ -63,6 +63,11 @@
                 <artifactId>jboss-corba-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.jboss.corba</groupId>
+                <artifactId>jboss-corba-openjdk-orb</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -82,6 +87,7 @@
         <module>api</module>
         <module>ext-api</module>
         <module>impl</module>
+        <module>javax-rmi</module>
     </modules>
 
 </project>
