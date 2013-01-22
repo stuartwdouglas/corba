@@ -36,6 +36,7 @@ import java.math.BigDecimal;
 import java.util.List ;
 import java.util.ArrayList ;
 
+import com.sun.corba.se.impl.encoding.CDROutputStream;
 import org.omg.CORBA.Principal ;
 import org.omg.CORBA.TypeCode ;
 import org.omg.CORBA.Any ;
@@ -104,6 +105,7 @@ public class AnyImpl extends Any
     // detect an optimization in read_value().
     //
     private CDRInputStream stream;
+    private CDROutputStream ostream;
     private long value;
     private java.lang.Object object;
 
@@ -199,8 +201,8 @@ public class AnyImpl extends Any
             object = objImpl.object;
             isInitialized = objImpl.isInitialized;
 
-            if (objImpl.stream != null)
-                stream = objImpl.stream.dup();
+            if (objImpl.stream() != null)
+                stream = objImpl.stream().dup();
 
         } else {
             read_value(obj.create_input_stream(), obj.type());
@@ -504,7 +506,7 @@ public class AnyImpl extends Any
     public org.omg.CORBA.portable.OutputStream create_output_stream()
     {
         //debug.log ("create_output_stream");
-        return new AnyOutputStream(orb);
+        return this.ostream = new AnyOutputStream(orb);
     }
 
     /**
@@ -520,13 +522,20 @@ public class AnyImpl extends Any
         //
         //debug.log ("create_input_stream");
         if (AnyImpl.isStreamed[realType().kind().value()]) {
-            return stream.dup();
+            return stream().dup();
         } else {
             OutputStream os = (OutputStream)orb.create_output_stream();
             TCUtility.marshalIn(os, realType(), value, object);
 
             return os.create_input_stream();
         }
+    }
+
+    private CDRInputStream stream() {
+        if (stream == null && ostream != null) {
+            stream = (CDRInputStream) ostream.create_input_stream();
+        }
+        return stream;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -592,7 +601,7 @@ public class AnyImpl extends Any
     {
         //debug.log ("write_value");
         if (AnyImpl.isStreamed[realType().kind().value()]) {
-            typeCode.copy(stream.dup(), out);
+            typeCode.copy(stream().dup(), out);
         } else {
             // _REVISIT_ check isInitialized whether all we write is TypeCode!
             TCUtility.marshalIn(out, realType(), value, object);
@@ -1314,7 +1323,7 @@ public class AnyImpl extends Any
     public Any extractAny(TypeCode memberType, ORB orb) {
         Any returnValue = orb.create_any();
         OutputStream out = returnValue.create_output_stream();
-        TypeCodeImpl.convertToNative(orb, memberType).copy((InputStream)stream, out);
+        TypeCodeImpl.convertToNative(orb, memberType).copy((InputStream) stream(), out);
         returnValue.read_value(out.create_input_stream(), memberType);
         return returnValue;
     }
